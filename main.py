@@ -1,7 +1,7 @@
 import discord
+import auth
 
-# bot token constant
-TOKEN = 'NTkyNzczNTg2NzE3MjQ1NDQx.XRENsA.4_7Ft1ZD7n3Ck6QG0kjpe5_uy1g'
+TOKEN = auth.TOKEN
 
 client = discord.Client()
 
