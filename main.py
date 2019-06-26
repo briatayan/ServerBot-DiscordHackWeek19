@@ -1,39 +1,53 @@
 import discord
+from discord.ext import commands
 import logging
-
 import auth
 import helperMethods
-import AddToServerList
+import serverMethods
 
 logging.basicConfig(level=logging.INFO)
 
 TOKEN = auth.TOKEN
 
-client = discord.Client()
+client= commands.Bot(command_prefix='!')
 
-db = dict(dict())
-
-# responds to commands
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-    if message.content.startswith('!hello'):
-        msg = "Hello {0.author.mention}".format(message)
-        await client.send_message(message.channel, msg)
-
-    if message.content.startswith('!help'):
-        msg = ":question: List of ServerBot Commands :question:\n- !search : " +\
-                "Enter a list of tags to search for a server! ex. !search FFXIV Adult Siren"
-        msg = msg.format(message)
-        await client.send_message(message.channel, msg)
+client.remove_command('help')
 
 # initial code
+
 @client.event
+
+#commands go here
 async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
+    print("bot is ready")
+
+@client.event
+async def on_memeber_join(memeber):
+    print ("f'{memeber} has joined serve.")
+
+@client.event
+async def on_memeber_remove(memeber):
+    print ("f'{memeber} has left the serve.")
+
+@client.command()
+async def ping(ctx):
+    await ctx.send(f'Pong!{round(client.latency * 1000)}ms')
+
+@client.command()
+async def help(ctx):
+    msg = "List of commands go here"
+    await ctx.send(msg)
+
+@client.command()
+async def Hello(ctx):
+    await ctx.send(f"hello {ctx.author.mention}!")
+
+@client.command()
+async def addserver(ctx)
+    #if the author's message contains a server id, tags, and a description then send a message saying it has been added
+
+    await ctx.()
+    #else, say it has not been added and tell them to add an id, tags, and a description.
+return
 
 client.run(TOKEN)
