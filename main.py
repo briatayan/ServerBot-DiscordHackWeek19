@@ -1,6 +1,9 @@
 import discord
-import auth
 import logging
+
+import auth
+import helperMethods
+import AddToServerList
 
 logging.basicConfig(level=logging.INFO)
 
@@ -15,19 +18,15 @@ db = dict(dict())
 async def on_message(message):
     if message.author == client.user:
         return
-    if not message.content.startswith('!'):
-        msg = 'Need some help? Use !help for a list of commands!'.format(message)
-        await client.send_message(message.channel, msg)
     if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
+        msg = "Hello {0.author.mention}".format(message)
         await client.send_message(message.channel, msg)
+
     if message.content.startswith('!help'):
-        msg = ':question: List of ServerBot Commands :question:\n- !search : ' +\
-                'Enter a list of tags to search for a server! ex. !search FFXIV Adult Siren'
+        msg = ":question: List of ServerBot Commands :question:\n- !search : " +\
+                "Enter a list of tags to search for a server! ex. !search FFXIV Adult Siren"
         msg = msg.format(message)
         await client.send_message(message.channel, msg)
-
-
 
 # initial code
 @client.event
