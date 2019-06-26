@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 import auth
 import logging
+import helperMethods
+import AddToServerList
 
 logging.basicConfig(level=logging.INFO)
 
