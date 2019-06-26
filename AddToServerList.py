@@ -14,8 +14,6 @@ serverlist =	{
 
 serverlist["name1"]= {"tags": "filler", "Description": "Just like half of Dragon Ball"}
 
-
-
 def serveradd ():
     if "name" in serverlist:
         print("Sorry,this server already exsists on the list. Try appending to the server with !serverchange")
@@ -26,4 +24,25 @@ def serveradd ():
 
 serveradd()
 
-#print(serverlist)
+print(serverlist)
+
+def serverupdate():
+    if name in serverlist:
+        serverlist[name]= {"tags": "changed", "Description": Description}
+        print("Your server has been updated!")
+
+serverupdate()
+
+print(serverlist)
+
+def serverdelete():
+    if name in serverlist:
+        del serverlist[name]
+        print("name" "has been deleted!")
+
+    else:
+        print("This server is currently not apart of our list.")
+
+serverdelete()
+
+print(serverlist)
