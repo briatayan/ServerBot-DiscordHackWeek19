@@ -46,20 +46,24 @@ async def hello(ctx):
 
 @client.command()
 async def addserver(ctx):
-    #if the message has a name, tags, and a description, then check and make sure they're the admin/owner than print the message
     confmessage = "Great! Your server is under review and will be apart of the server list soon."
-    #else reject it.
     rejmessage = "Oh no! It looks like something went wrong. Don't forget the format is name : tag, tag, tag : description"
-    #else, say it has not been added and tell them to add an id, tags, and a description.
+    missmessage = "Looks like you're missing either a name, 1-10 tag(s), or a description."
     msg = ctx.message.content.strip("!addserver")
+    name = ctx.message.content.split(":",2)[0].split(",")
     tags = ctx.message.content.split(":",2)[1].split(",")
-
+    description = ctx.message.content.split(":",2)[2].split(",")
     if len(tags) >= 1 and len(tags) <= 10:
-        print(helperMethods.tagsplit(msg, ":"))
-        await ctx.send(confmessage)
+        try:
+            print(helperMethods.tagsplit(msg, ":"))
+            serverMethods.serverAdd(name,tags,description)
+            await ctx.send(confmessage)
 
-    else
-        awai ctx.send(rejmessage)
+        except TypeError:
+            await ctx.send(missmessage)
+
+        except:
+            await ctx.send(rejmessage)
 
 
 client.run(TOKEN)
