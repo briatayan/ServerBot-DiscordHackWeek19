@@ -106,7 +106,7 @@ def serverEdit(serverID, key, newVal):
 
 def serverSearch(tags):
     # gets the tags as a string and splits each tag into a list
-    tags = helperMethods.tagsplit(tags)
+    tags = helperMethods.tagsplit(tags, ",")
     result = []
     serverlist = getData()
     # for each item in the serverlist
@@ -116,7 +116,7 @@ def serverSearch(tags):
         matchCount = 0
         matchedTag = False
         # gets the number of tags that the current server has
-        serverTagLength = len(helperMethods.tagsplit(val["tags"]))
+        serverTagLength = len(helperMethods.tagsplit(val["tags"], ","))
         # makes new key val pair to be inserted into list
         newItem = dict({key : val})
         # for each tag in the given set of tags
