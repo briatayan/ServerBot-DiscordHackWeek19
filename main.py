@@ -13,12 +13,8 @@ client= commands.Bot(command_prefix='!')
 
 client.remove_command('help')
 
-<<<<<<< HEAD
 # initial code
 
-=======
-# responds to commands
->>>>>>> ce2110a69c49a20069dc8b60b4a831fc552fee03
 @client.event
 
 #commands go here
@@ -48,7 +44,7 @@ async def hello(ctx):
 
 @client.command()
 async def addserver(ctx)
-    await 
+    await
     #if the author's message contains a server id, tags, and a description then send a message saying it has been added
 
     await ctx.()
