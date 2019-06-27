@@ -1,27 +1,23 @@
 import discord
 from discord.ext import commands
-import auth
 import logging
+import auth
 import helperMethods
-import AddToServerList
+import serverMethods
 
 logging.basicConfig(level=logging.INFO)
 
 TOKEN = auth.TOKEN
 
-#client = discord.Client()
-
 client= commands.Bot(command_prefix='!')
 
 client.remove_command('help')
 
-db = dict(dict())
+# initial code
 
-# responds to commands
 @client.event
 
 #commands go here
-
 async def on_ready():
     print("bot is ready")
 
@@ -48,6 +44,7 @@ async def Hello(ctx):
 
 @client.command()
 async def addserver(ctx)
+    await 
     #if the author's message contains a server id, tags, and a description then send a message saying it has been added
 
     await ctx.()
