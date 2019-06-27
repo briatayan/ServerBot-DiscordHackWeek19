@@ -4,17 +4,6 @@
 #Step 1. Create a function with an if statement checking to see if the server is on the dictionary.
 #step 2. If the server is on the dictionary, reject it. If the server is not on the dictionary add it to the dictionary.
 
-
-# name = "Jame Cage White Server"
-# tag = "very, cool, much, swag"
-# Description = "A james cage white server"
-#
-# serverlist =	{
-#   "server": {"tags": "wow, aliance, pvp, clan", "Description": "This server is a Wow server for an aliance clan!"}
-#   }
-#
-# serverlist["name1"]= {"tags": "filler", "Description": "Just like half of Dragon Ball"}
-
 import json
 import os.path
 from os import path
@@ -110,3 +99,39 @@ def serverEdit(serverID, key, newVal):
         return isEdited
     else:
         return isEdited
+
+#    searches the serverlist for servers that share tags with the given tags --
+#    tags is a string of comma-separated tags, and the function returns a List
+#    of all servers that are found that match at least one tag.
+
+def serverSearch(tags):
+    # gets the tags as a string and splits each tag into a list
+    tags = helperMethods.tagsplit(tags)
+    result = []
+    serverlist = getData()
+    # for each item in the serverlist
+    for key, val in serverlist.items():
+        # initializes default value for match percent, match count, matched flag
+        matchPercent = 0
+        matchCount = 0
+        matchedTag = False
+        # gets the number of tags that the current server has
+        serverTagLength = len(helperMethods.tagsplit(val["tags"]))
+        # makes new key val pair to be inserted into list
+        newItem = dict({key : val})
+        # for each tag in the given set of tags
+        for tag in tags:
+            # count how many of the tags match the tags of the server
+            if tag in val["tags"]:
+                matchCount += 1
+                # set matched flag as true
+                matchedTag = True
+        # after counting all the matched tags, if any
+        if matchedTag:
+            # calculate percentage of given tags that match the server's tags
+            matchPercent = int((matchCount / serverTagLength) * 100)
+            # update new key val pair with percentage
+            newItem[key].update(dict(percentageMatched = str(matchPercent)))
+            # add new key val pair to result list
+            result.append(newItem)
+    return result

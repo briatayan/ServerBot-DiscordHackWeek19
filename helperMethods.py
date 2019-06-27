@@ -1,8 +1,8 @@
 # tags = "world of warcraft, pvp, pve, aliance, hunter, tank, titan, warlock, shadowbringer, destiny, final fantasy, player versus enemy, player versus player, lol, laugh out loud"
 
 #tag split function
-def tagsplit (tags):
-    x = tags.split(",")
+def tagsplit (tags, sep):
+    x = tags.split(sep)
     i = 0
     # removes all trailing and beginning whitespace
     while i < len(x):
