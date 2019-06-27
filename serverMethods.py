@@ -40,7 +40,6 @@ def getData():
 
 ### SERVER FUNCTIONS ###
 
-
 #    adds a server to the JSON file database -- all args need to be strings, returns
 #    True if the item was added, False if it wasn't (this can be used to determine
 #    the response from the bot, and is the same format in the rest of the functions)
@@ -76,7 +75,7 @@ def serverRemove(serverID):
     serverlist = getData()
     # checks if serverID is in the serverlist, if True, then pop serverID off the
     # dictionary and reutrn True, return False otherwise
-    if serverID in  serverlist:
+    if serverID in serverlist:
         serverlist.pop(serverID)
         writeData(serverlist)
         isRemoved = True
@@ -109,7 +108,7 @@ def serverSearch(tags):
     tags = helperMethods.tagsplit(tags, ",")
     result = []
     serverlist = getData()
-    # for each item in the serverlist
+    # for each item in the serverlist, worst case is O(n)
     for key, val in serverlist.items():
         # initializes default value for match percent, match count, matched flag
         matchPercent = 0
@@ -135,3 +134,19 @@ def serverSearch(tags):
             # add new key val pair to result list
             result.append(newItem)
     return result
+
+### OTHER HELPER FUNCTIONS ###
+
+#    Returns corresponding serverID when given a server name -- returns ID as
+#    an integer if found, None if not found
+
+def getServerID(serverName):
+    serverID = None
+    serverlist = getData()
+    # checks each server in server list, in the worst case, will run for O(n) time
+    for key, val in serverlist.items():
+        # if a matching name is found, break the loop
+        if serverName == val["name"]:
+            serverID = key
+            break
+    return serverID
