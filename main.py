@@ -3,7 +3,7 @@ from discord.ext import commands
 import auth
 import logging
 import helperMethods
-import AddToServerList
+import serverMethods
 
 logging.basicConfig(level=logging.INFO)
 
@@ -15,8 +15,6 @@ client= commands.Bot(command_prefix='!')
 
 client.remove_command('help')
 
-db = dict(dict())
-
 # responds to commands
 @client.event
 
@@ -26,12 +24,12 @@ async def on_ready():
     print("bot is ready")
 
 @client.event
-async def on_memeber_join(memeber):
-    print ("f'{memeber} has joined serve.")
+async def on_memeber_join(member):
+    print ("f'{member} has joined server.")
 
 @client.event
-async def on_memeber_remove(memeber):
-    print ("f'{memeber} has left the serve.")
+async def on_memeber_remove(member):
+    print ("f'{member} has left the server.")
 
 @client.command()
 async def ping(ctx):
@@ -43,7 +41,7 @@ async def help(ctx):
     await ctx.send(msg)
 
 @client.command()
-async def Hello(ctx):
+async def hello(ctx):
     await ctx.send(f"hello {ctx.author.mention}!")
 
 @client.command()

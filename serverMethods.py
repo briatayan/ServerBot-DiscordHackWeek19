@@ -19,6 +19,8 @@ import json
 import os.path
 from os import path
 
+import helperMethods
+
 filename = "server_list.json"
 
 ### SERVER HELPER FUNCTIONS ###
@@ -49,7 +51,7 @@ def getData():
 
 ### SERVER FUNCTIONS ###
 
-def serveradd (serverID, name, tag, description):
+def serverAdd (serverID, name, tag, description):
     isAdded = False
     newVal = {serverID : {"name" : name, "tags" : tag, "Description" : description}}
     serverlist = getData()
@@ -57,7 +59,7 @@ def serveradd (serverID, name, tag, description):
         initList(newVal)
         isAdded = True
         return isAdded
-    if str(serverID) in serverlist:
+    if serverID in serverlist:
         return isAdded
     else:
         serverlist.update(newVal)
@@ -65,19 +67,18 @@ def serveradd (serverID, name, tag, description):
         isAdded = True
         return isAdded
 
-def serverremove(serverID):
+def serverRemove(serverID):
     isRemoved = False
     serverlist = getData()
-    if str(serverID) in  serverlist:
-        serverlist.pop(str(serverID))
+    if serverID in  serverlist:
+        serverlist.pop(serverID)
         writeData(serverlist)
         isRemoved = True
         return isRemoved
     else:
         return isRemoved
 
-def serveredit(serverID, key, newVal):
-    serverID = str(serverID)
+def serverEdit(serverID, key, newVal):
     isEdited = False
     serverlist = getData()
     if serverID in serverlist:
