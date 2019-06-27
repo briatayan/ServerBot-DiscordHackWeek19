@@ -47,8 +47,8 @@ async def hello(ctx):
 @client.command()
 async def addserver(ctx):
     #if the message has a name, tags, and a description, then check and make sure they're the admin/owner than print the message
-    msg = ctx.message.content
-    print(helperMethods.tagsplit(msg))
+    msg = ctx.message.content.strip("!addserver")
+    print(helperMethods.tagsplit(msg, ":"))
 
     confmessage = "Great! Your server is under review and will be apart of the server list soon."
     #else reject it.
