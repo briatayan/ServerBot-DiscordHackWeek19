@@ -11,6 +11,8 @@ TOKEN = auth.TOKEN
 
 client= commands.Bot(command_prefix='!')
 
+message = client.get_channel(id)
+
 client.remove_command('help')
 
 # initial code
@@ -43,12 +45,14 @@ async def hello(ctx):
     await ctx.send(f"hello {ctx.author.mention}!")
 
 @client.command()
-async def addserver(ctx)
-    await
-    #if the author's message contains a server id, tags, and a description then send a message saying it has been added
+async def addserver(ctx):
+    #if the message has a name, tags, and a description, then check and make sure they're the admin/owner than print the message
+    msg = ctx.message.content
+    print(helperMethods.tagsplit(msg))
 
-    await ctx.()
+    confmessage = "Great! Your server is under review and will be apart of the server list soon."
+    #else reject it.
+    rejmessage = "Oh no! It looks like something went wrong. Don't forget the format is name : tag, tag, tag : description"
     #else, say it has not been added and tell them to add an id, tags, and a description.
-return
 
 client.run(TOKEN)
