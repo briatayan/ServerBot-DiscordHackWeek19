@@ -55,6 +55,7 @@ async def addserver(ctx):
     name = ctx.guild.name
     # This is the old name command name = ctx.message.content.strip("!addserver").split(":",2)[0].split(",")#.helperMethods.tagsplit()
     tags = ctx.message.content.strip("!addserver").replace(" ","").split(",")#.helperMethods.tagsplit()
+    # old tag command description = ctx.message.content.split(":",2)[1].split(",")#.helperMethods.tagsplit()
     description = ctx.guild.description
     # This is the old description command description = ctx.message.content.split(":",2)[2].split(",")#.helperMethods.tagsplit()
 
