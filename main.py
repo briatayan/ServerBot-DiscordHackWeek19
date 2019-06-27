@@ -49,14 +49,22 @@ async def addserver(ctx):
     confmessage = "Great! Your server is under review and will be apart of the server list soon."
     rejmessage = "Oh no! It looks like something went wrong. Don't forget the format is name : tag, tag, tag : description"
     missmessage = "Looks like you're missing either a name, 1-10 tag(s), or a description."
+    servadmin = "It looks like you are nother server owner or administrator!"
     msg = ctx.message.content.strip("!addserver")
-    name = ctx.message.content.split(":",2)[0].split(",")
-    tags = ctx.message.content.split(":",2)[1].split(",")
-    description = ctx.message.content.split(":",2)[2].split(",")
-    if len(tags) >= 1 and len(tags) <= 10:
+    id = ctx.guild.id
+    name = ctx.guild.name
+    # This is the old name command name = ctx.message.content.strip("!addserver").split(":",2)[0].split(",")#.helperMethods.tagsplit()
+    tags = ctx.message.content.strip("!addserver").replace(" ","").split(",")#.helperMethods.tagsplit()
+    description = ctx.guild.description
+    # This is the old description command description = ctx.message.content.split(":",2)[2].split(",")#.helperMethods.tagsplit()
+
+#replace the colon with a . and remove the # to allow administrator only mode.
+    if ctx.message.author.guild_permissions:#administrator:
+
+        len(tags) >= 1 and len(tags) <= 10
         try:
             print(helperMethods.tagsplit(msg, ":"))
-            serverMethods.serverAdd(name,tags,description)
+            serverMethods.serverAdd(id,name,tags,description)
             await ctx.send(confmessage)
 
         except TypeError:
@@ -64,6 +72,8 @@ async def addserver(ctx):
 
         except:
             await ctx.send(rejmessage)
+    else:
+        await ctx.send(servadmin)
 
 
 client.run(TOKEN)
