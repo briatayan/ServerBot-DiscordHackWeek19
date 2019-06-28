@@ -131,13 +131,11 @@ async def editserver(ctx):
 async def serverSearch(ctx):
     confmessage = "Here are some servers match up with you"
     tags = ctx.message.content
-    serverMethods.serverSearch(str(tags))
-    for key in serverMethods.serverSearch.result():
-        print(key, value)
-
+    result = serverMethods.serverSearch(str(tags))
     await ctx.send(confmessage)
-
-
+for i in range(len(result)):
+    for key, val in result[i].items():
+        print(key, value)
 
 
 
