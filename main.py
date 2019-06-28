@@ -106,11 +106,12 @@ async def editserver(ctx):
     id = ctx.guild.id
     tags = ctx.message.content.strip("!editserver").split(":")[0].strip()
     description = ctx.message.content.strip("!editserver").split(":")[1].strip()
+    tags = tags.lower()
     if ctx.message.author.guild_permissions.administrator:
         ctx.message.content
         len(tags) >= 1 and len(tags) <= 10
         try:
-            print(tags)
+            print(description)
             print(helperMethods.tagsplit(msg, ":"))
             serverMethods.serverEdit(str(id), tags, description)
             await ctx.send(confmessage)
@@ -128,7 +129,7 @@ async def serverSearch(ctx):
     confmessage = "Here are some servers match up with you"
     tags = ctx.message.content
     serverMethods.serverSearch(str(tags))
-    for key in serverMethods.serverSearch.result:
+    for key in serverMethods.serverSearch.result():
         print(key, value)
 
     await ctx.send(confmessage)
