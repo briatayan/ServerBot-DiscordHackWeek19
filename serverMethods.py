@@ -38,6 +38,23 @@ def getData():
     else:
         return None
 
+# uses variation of selection sort to sort by percentage matched
+def sortResults(result):
+    for i in range(len(result)):
+        max = i
+        for key in result[i].keys():
+            maxKey = str(key)
+        for j in range(i + 1, len(result)):
+            for key in result[j].keys():
+                key = str(key)
+                currPerc = result[j][key]["percentageMatched"]
+                maxPerc = result[max][maxKey]["percentageMatched"]
+                if currPerc > maxPerc:
+                    max = j
+                    maxKey = key
+        result[i], result[max] = result[max], result[i]
+    return result
+
 ### SERVER FUNCTIONS ###
 
 #    adds a server to the JSON file database -- all args need to be strings, returns
@@ -136,6 +153,7 @@ def serverSearch(tags):
             newItem[key].update(dict(percentageMatched = str(matchPercent)))
             # add new key val pair to result list
             result.append(newItem)
+    sortResults(result)
     return result
 
 ### OTHER HELPER FUNCTIONS ###
