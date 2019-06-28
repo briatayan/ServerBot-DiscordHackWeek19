@@ -49,7 +49,7 @@ async def addserver(ctx):
     confmessage = "Great! Your server is under review and will be apart of the server list soon."
     rejmessage = "Oh no! It looks like something went wrong. Don't forget the format is name : tag, tag, tag : description"
     missmessage = "Looks like you're missing either a name, 1-10 tag(s), or a description."
-    servadmin = "It looks like you are nother server owner or administrator!"
+    servadmin = "It looks like you are neither server owner or administrator!"
     msg = ctx.message.content.strip("!addserver")
     id = ctx.guild.id
     name = ctx.guild.name
@@ -58,14 +58,38 @@ async def addserver(ctx):
     # old tag command description = ctx.message.content.split(":",2)[1].split(",")#.helperMethods.tagsplit()
     description = ctx.guild.description
     # This is the old description command description = ctx.message.content.split(":",2)[2].split(",")#.helperMethods.tagsplit()
-
 #replace the colon with a . and remove the # to allow administrator only mode.
-    if ctx.message.author.guild_permissions:#administrator:
+    if ctx.message.author.guild_permissions.administrator:
 
         len(tags) >= 1 and len(tags) <= 10
         try:
             print(helperMethods.tagsplit(msg, ":"))
-            serverMethods.serverAdd(id,name,tags,description)
+            serverMethods.serverAdd(str(id),name,tags,description)
+            await ctx.send(confmessage)
+
+        except TypeError:
+            await ctx.send(missmessage)
+
+        except:
+            await ctx.send(rejmessage)
+    else:
+        await ctx.send(servadmin)
+    return
+
+@client.command()
+async def deleteserver(ctx):
+    confmessage = "Great! Your server you will be removed from the list shorly."
+    rejmessage = "Oh no! It looks like something went wrong."
+    missmessage = "It looks like you're missing something!"
+    servadmin = "It looks like you are neither server owner or administrator!"
+    msg = ctx.message.content.strip("!deleteserver")
+    id = ctx.guild.id
+
+#replace the colon with a . and remove the # to allow administrator only mode.
+    if ctx.message.author.guild_permissions.administrator:
+        try:
+            print(id)
+            serverMethods.serverRemove(str(id))
             await ctx.send(confmessage)
 
         except TypeError:
@@ -76,5 +100,30 @@ async def addserver(ctx):
     else:
         await ctx.send(servadmin)
 
+@client.command()
+async def editserver(ctx):
+    confmessage = "Great! Your server has been edited!"
+    rejmessage = "Oh no! It looks like your server wasn't edited"
+    missmessage = "Looks like you're missing a new tag or Description"
+    servadmin = "It looks like you are neither server owner or administrator!"
+    msg = ctx.message.content.strip("!editserver")
+    id = ctx.guild.id
+    tags = ctx.message.content.strip("!editserver").split(":")[1]
+    description = ctx.guild.description
+    if ctx.message.author.guild_permissions.administrator:
+        ctx.message.content
+        len(tags) >= 1 and len(tags) <= 10
+        try:
+            print(tags)
+            print(helperMethods.tagsplit(msg, ":"))
+            serverMethods.serverEdit(str(id), tags, description)
+            await ctx.send(confmessage)
 
+        except TypeError:
+            await ctx.send(missmessage)
+
+        except:
+            await ctx.send(rejmessage)
+    else:
+        await ctx.send(servadmin)
 client.run(TOKEN)
