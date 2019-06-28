@@ -76,8 +76,11 @@ def serverRemove(serverID):
     # checks if serverID is in the serverlist, if True, then pop serverID off the
     # dictionary and reutrn True, return False otherwise
     if serverID in serverlist:
-        serverlist.pop(serverID)
-        writeData(serverlist)
+        try:
+            del serverlist[serverID]
+            writeData(serverlist)
+        except KeyError:
+            pass
         isRemoved = True
         return isRemoved
     else:
