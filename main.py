@@ -104,8 +104,8 @@ async def editserver(ctx):
     servadmin = "It looks like you are neither server owner or administrator! Try asking one of them?"
     msg = ctx.message.content.strip("!editserver")
     id = ctx.guild.id
-    tags = ctx.message.content.strip("!editserver").split(":")[0]
-    description = ctx.message.content.strip("!editserver").split(":")[1]
+    tags = ctx.message.content.strip("!editserver").split(":")[0].strip()
+    description = ctx.message.content.strip("!editserver").split(":")[1].strip()
     if ctx.message.author.guild_permissions.administrator:
         ctx.message.content
         len(tags) >= 1 and len(tags) <= 10
