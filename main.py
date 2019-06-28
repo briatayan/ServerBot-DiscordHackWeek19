@@ -51,11 +51,10 @@ async def addserver(ctx):
     msg = ctx.message.content.strip("!addserver")
     id = ctx.guild.id
     name = ctx.guild.name
-    # This is the old name command name = ctx.message.content.strip("!addserver").split(":",2)[0].split(",")#.helperMethods.tagsplit()
-    tags = ctx.message.content.strip("!addserver").replace(" ","").split(",")#.helperMethods.tagsplit()
-    # old tag command description = ctx.message.content.split(":",2)[1].split(",")#.helperMethods.tagsplit()
-    description = ctx.guild.description
-    # This is the old description command description = ctx.message.content.split(":",2)[2].split(",")#.helperMethods.tagsplit()
+    # This is the old name command name = ctx.message.content.strip("!addserver").split(":",2)[0].split(",")
+    tags = ctx.message.content.strip("!addserver").strip().split(":")[0].strip()
+    # old tag command description = ctx.message.content.split(":",2)[1].split(",")
+    description = ctx.message.content.split(":",2)[1].strip()
 #replace the colon with a . and remove the # to allow administrator only mode.
     if ctx.message.author.guild_permissions.administrator:
 
@@ -106,7 +105,7 @@ async def editserver(ctx):
     msg = ctx.message.content.strip("!editserver")
     id = ctx.guild.id
     tags = ctx.message.content.strip("!editserver").split(":")[0]
-    description = ctx.guild.description
+    description = ctx.message.content.strip("!editserver").split(":")[1]
     if ctx.message.author.guild_permissions.administrator:
         ctx.message.content
         len(tags) >= 1 and len(tags) <= 10
