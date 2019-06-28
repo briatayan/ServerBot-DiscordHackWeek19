@@ -25,11 +25,7 @@ async def on_ready():
 
 @client.event
 async def on_memeber_join(member):
-    print ("f'{member} has joined server.")
-
-@client.event
-async def on_memeber_remove(member):
-    print ("f'{member} has left the server.")
+    await ctx.send(Hello {ctx.guild.owner} use !help to get started)
 
 @client.command()
 async def ping(ctx):
@@ -37,7 +33,12 @@ async def ping(ctx):
 
 @client.command()
 async def help(ctx):
-    msg = "List of commands go here"
+    msg = "Need some help? Here are the commands and how to use them! \n\ +\
+    !addserver allows you to add yourserver to our running list. Use: !addserver tag1, tag2, etc. up to tag10. \n\ +\
+    !editserver allowes you to edit your tags and description. Use: !editserver tags: tag1, tag2, etc. up to tag10. \n\ +\
+    !deleteserver deletes yourserver from the list. Use: !deleteserver \n\ \+
+    !search allows you to search for servers you have tags in common with. Use. !search tag1, tag2, etc. up to tag10. \n\ \+
+    !help well this is awkward."
     await ctx.send(msg)
 
 @client.command()
@@ -125,4 +126,5 @@ async def editserver(ctx):
             await ctx.send(rejmessage)
     else:
         await ctx.send(servadmin)
+
 client.run(TOKEN)
