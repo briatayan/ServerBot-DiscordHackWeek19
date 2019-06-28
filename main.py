@@ -31,11 +31,11 @@ async def ping(ctx):
 @client.command()
 async def help(ctx):
     msg = "Need some help? Here are the commands and how to use them! \n\
-    !addserver allows you to add yourserver to our running list. Use: !addserver tag1, tag2, etc. up to tag10. \n\
-    !editserver allowes you to edit your tags and description. Use: !editserver tags: tag1, tag2, etc. up to tag10. \n\
-    !deleteserver deletes yourserver from the list. Use: !deleteserver \n\
-    !search allows you to search for servers you have tags in common with. Use. !search tag1, tag2, etc. up to tag10. \n\
-    !help well this is awkward."
+!addserver allows you to add yourserver to our running list. Use: !addserver tag1, tag2, etc. up to tag10. \n\
+!editserver allowes you to edit your tags and description. Use: !editserver tags: tag1, tag2, etc. up to tag10. \n\
+!deleteserver deletes yourserver from the list. Use: !deleteserver \n\
+!search allows you to search for servers you have tags in common with. Use. !search tag1, tag2, etc. up to tag10. \n\
+!help well this is awkward."
     await ctx.send(msg)
 
 @client.command()
@@ -128,12 +128,8 @@ async def serverSearch(ctx):
     confmessage = "Here are some servers match up with you"
     tags = ctx.message.content
     serverMethods.serverSearch(str(tags))
-    result = []
-    index = 0
-    while index < len(result):
-        for key in result[index].keys():
-            print(result[index][key]["percentageMatched"])
-        index += 1
+    for key in serverMethods.serverSearch.result:
+        print(key, value)
 
     await ctx.send(confmessage)
 
