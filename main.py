@@ -123,4 +123,22 @@ async def editserver(ctx):
     else:
         await ctx.send(servadmin)
 
+@client.command()
+async def serverSearch(ctx):
+    confmessage = "Here are some servers match up with you"
+    tags = ctx.message.content
+    serverMethods.serverSearch(str(tags))
+    result = []
+    index = 0
+    while index < len(result):
+        for key in result[index].keys():
+            print(result[index][key]["percentageMatched"])
+        index += 1
+
+    await ctx.send(confmessage)
+
+
+
+
+
 client.run(TOKEN)
