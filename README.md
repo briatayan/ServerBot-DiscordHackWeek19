@@ -19,5 +19,5 @@
   <li><b>!removeserver</b> -- An admin can use this command to remove their server from our database. </li>
   </ul>
   
-  <h2>Design Caveats<h2>
+  <h2>Design Caveats</h2>
   <p>Because of the limited time restriction and the learning curve of working with the Discord API, we decided to have our "database" be a single JSON file hosted on the machine that is currently running the bot. After exploring options such as hosting a SQL database on Amazon's DynamoDB or Google Cloud's database service, we figured it'd be worth it to focus on getting the bot to function as expected before trying to implement a database system. </p>
