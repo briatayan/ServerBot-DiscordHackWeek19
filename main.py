@@ -52,9 +52,9 @@ async def addserver(ctx):
     id = ctx.guild.id
     name = ctx.guild.name
     # This is the old name command name = ctx.message.content.strip("!addserver").split(":",2)[0].split(",")
-    tags = ctx.message.content.strip("!addserver").strip().split(":")[0].strip()
+    tags = msg.strip().split(":")[0].strip()
     # old tag command description = ctx.message.content.split(":",2)[1].split(",")
-    description = ctx.message.content.split(":",2)[1].strip()
+    description = msg.split(":",2)[1].strip()
 #replace the colon with a . and remove the # to allow administrator only mode.
     if ctx.message.author.guild_permissions.administrator:
 
@@ -104,13 +104,16 @@ async def editserver(ctx):
     servadmin = "It looks like you are neither server owner or administrator! Try asking one of them?"
     msg = ctx.message.content.strip("!editserver")
     id = ctx.guild.id
-    tags = ctx.message.content.strip("!editserver").split(":")[0].strip()
-    description = ctx.message.content.strip("!editserver").split(":")[1].strip()
+    tags = msg.split(":")[0].strip()
+    description = msg.split(":")[1].strip()
     tags = tags.lower()
     if ctx.message.author.guild_permissions.administrator:
         ctx.message.content
         len(tags) >= 1 and len(tags) <= 10
         try:
+            print(msg)
+            print(id)
+            print(tags)
             print(description)
             print(helperMethods.tagsplit(msg, ":"))
             serverMethods.serverEdit(str(id), tags, description)
