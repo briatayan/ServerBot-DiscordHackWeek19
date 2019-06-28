@@ -81,11 +81,10 @@ async def deleteserver(ctx):
     confmessage = "Great! Your server you will be removed from the list shorly."
     rejmessage = "Oh no! It looks like something went wrong."
     missmessage = "It looks like you're missing something!"
-    servadmin = "It looks like you are neither server owner or administrator!"
+    servadmin = "It looks like you are not a server owner or administrator. oops"
     msg = ctx.message.content.strip("!deleteserver")
     id = ctx.guild.id
 
-#replace the colon with a . and remove the # to allow administrator only mode.
     if ctx.message.author.guild_permissions.administrator:
         try:
             print(id)
@@ -104,11 +103,11 @@ async def deleteserver(ctx):
 async def editserver(ctx):
     confmessage = "Great! Your server has been edited!"
     rejmessage = "Oh no! It looks like your server wasn't edited"
-    missmessage = "Looks like you're missing a new tag or Description"
-    servadmin = "It looks like you are neither server owner or administrator!"
+    missmessage = "Looks like you're missing a new tag or Description! Use !editserver tags: tag 1, tag 2, tag 3, or description: description goes here"
+    servadmin = "It looks like you are neither server owner or administrator! Try asking one of them?"
     msg = ctx.message.content.strip("!editserver")
     id = ctx.guild.id
-    tags = ctx.message.content.strip("!editserver").split(":")[1]
+    tags = ctx.message.content.strip("!editserver").split(":")[0]
     description = ctx.guild.description
     if ctx.message.author.guild_permissions.administrator:
         ctx.message.content
