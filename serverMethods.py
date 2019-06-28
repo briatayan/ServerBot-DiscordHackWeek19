@@ -48,7 +48,7 @@ def getData():
 def serverAdd (serverID, name, tag = None, description = None):
     isAdded = False
     # initializes new item to be inserted into dictionary
-    newVal = {serverID : {"name" : name, "tags" : tag, "Description" : description}}
+    newVal = {serverID : {"name" : name, "tags" : tag, "description" : description}}
     # gets dictionary from JSON file, all keys and values are strings
     serverlist = getData()
     # adds newVal to new server_list file if the file doesn't exist
