@@ -45,7 +45,7 @@ def getData():
 #    the response from the bot, and is the same format in the rest of the functions)
 
 
-def serverAdd (serverID, name, tag, description):
+def serverAdd (serverID, name, tag = None, description = None):
     isAdded = False
     # initializes new item to be inserted into dictionary
     newVal = {serverID : {"name" : name, "tags" : tag, "Description" : description}}
@@ -74,7 +74,7 @@ def serverRemove(serverID):
     # gets serverlist from JSON file
     serverlist = getData()
     # checks if serverID is in the serverlist, if True, then pop serverID off the
-    # dictionary and reutrn True, return False otherwise
+    # dictionary and return True, return False otherwise
     if serverID in serverlist:
         try:
             del serverlist[serverID]
