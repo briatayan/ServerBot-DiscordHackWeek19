@@ -129,6 +129,7 @@ async def editserver(ctx):
 
 @client.command()
 async def serverSearch(ctx):
+    apiLink = 'https://discordapp.com/api/channels/'
     tags = ctx.message.content.strip("!serverSearch")
     result = serverMethods.serverSearch(str(tags))
     for i in range(len(result)):
@@ -138,7 +139,7 @@ async def serverSearch(ctx):
             description = value["description"]
             percentageMatched = value["percentageMatched"]
             id = key
-            link = client.get_guild(int(key)).fetch_invite(key)
+            link = client.get_guild(int(key)).create_invite(key)
             print(type(link))
             message = confmessage + name + description + percentageMatched
             print(message)
