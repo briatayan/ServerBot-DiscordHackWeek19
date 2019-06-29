@@ -102,23 +102,17 @@ async def editserver(ctx):
     rejmessage = "Oh no! It looks like your server wasn't edited"
     missmessage = "Looks like you're missing a new tag or Description! Use !editserver tags; tag 1, tag 2, tag 3. description; description goes here. or invite; new link here"
     servadmin = "It looks like you are neither server owner or administrator! Try asking one of them?"
-    msg = ctx.message.content.strip("!editserver")
+    msg = ctx.message.content.replace("!editserver", "")
     id = ctx.guild.id
     tags = msg.split(";")[0].strip()
     description = msg.split(";")[1].strip()
-    invite = msg.split(";")[2].strip()
     tags = tags.lower()
     if ctx.message.author.guild_permissions.administrator:
         ctx.message.content
         len(tags) >= 1 and len(tags) <= 10
         try:
             print(msg)
-            print(id)
-            print(tags)
-            print(description)
-            print(invite)
-            print(helperMethods.tagsplit(msg, ":"))
-            serverMethods.serverEdit(str(id), tags, description, invite)
+            serverMethods.serverEdit(str(id), tags, description)
             await ctx.send(confmessage)
 
         except TypeError:
@@ -130,11 +124,11 @@ async def editserver(ctx):
         await ctx.send(servadmin)
 
 @client.command()
-async def serverSearch(ctx):
+async def serversearch(ctx):
     tags = ctx.message.content.strip("!serverSearch")
     result = serverMethods.serverSearch(str(tags))
     if result:
-        message = serverMethods.formatMessage(result)
+        message = helperMethods.formatMessage(result)
     else:
         message = "There aren't any servers with any of those tags, sorry!"
     await ctx.send(message)
