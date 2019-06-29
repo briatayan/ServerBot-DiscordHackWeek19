@@ -10,7 +10,7 @@
 <h2>What can ServerBot do?</h2>
   <h3>User Features</h3>
   <ul>
-  <li> <b>!searchServer [comma-separated tags]</b> -- A user inputs a set of tags to search for servers that include one or more of the tags.  Returns the name of the server, the server's tags, the server's description, and the percentage of the server's tags that match the user's list.</li>
+  <li> <b>!serversearch [comma-separated tags]</b> -- A user inputs a set of tags to search for servers that include one or more of the tags.  Returns the name of the server, the server's tags, the server's description, and the percentage of the server's tags that match the user's list.</li>
   </ul>
   <h3>Server Admin Features</h3>
   <ul>
