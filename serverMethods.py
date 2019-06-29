@@ -65,7 +65,7 @@ def sortResults(result):
 def serverAdd (serverID, name, tag = None, description = None, inviteURL = None):
     isAdded = False
     # initializes new item to be inserted into dictionary
-    newVal = {serverID : {"name" : name, "tags" : tag, "description" : description, "inviteURL" : inviteURL}}
+    newVal = {serverID : {"name" : name, "tags" : tag, "description" : description, "invite" : inviteURL}}
     # gets dictionary from JSON file, all keys and values are strings
     serverlist = getData()
     # adds newVal to new server_list file if the file doesn't exist
