@@ -106,7 +106,7 @@ async def editserver(ctx):
     id = ctx.guild.id
     tags = msg.split(";")[0].strip()
     description = msg.split(";")[1].strip()
-    invite = msg.split(";")[1].strip()
+    invite = msg.split(";")[2].strip()
     tags = tags.lower()
     if ctx.message.author.guild_permissions.administrator:
         ctx.message.content
