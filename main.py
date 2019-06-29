@@ -106,19 +106,12 @@ async def editserver(ctx):
     id = ctx.guild.id
     tags = msg.split(";")[0].strip()
     description = msg.split(";")[1].strip()
-    invite = msg.split(";")[2].strip()
     tags = tags.lower()
     if ctx.message.author.guild_permissions.administrator:
         ctx.message.content
         len(tags) >= 1 and len(tags) <= 10
         try:
-            print(msg)
-            print(id)
-            print(tags)
-            print(description)
-            print(invite)
-            print(helperMethods.tagsplit(msg, ":"))
-            serverMethods.serverEdit(str(id), tags, description, invite)
+            serverMethods.serverEdit(str(id), tags, description)
             await ctx.send(confmessage)
 
         except TypeError:
