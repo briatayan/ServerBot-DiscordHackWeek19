@@ -62,10 +62,10 @@ def sortResults(result):
 #    the response from the bot, and is the same format in the rest of the functions)
 
 
-def serverAdd (serverID, name, tag = None, description = None):
+def serverAdd (serverID, name, tag = None, description = None, inviteURL = None):
     isAdded = False
     # initializes new item to be inserted into dictionary
-    newVal = {serverID : {"name" : name, "tags" : tag, "description" : description}}
+    newVal = {serverID : {"name" : name, "tags" : tag, "description" : description, "inviteURL" : inviteURL}}
     # gets dictionary from JSON file, all keys and values are strings
     serverlist = getData()
     # adds newVal to new server_list file if the file doesn't exist

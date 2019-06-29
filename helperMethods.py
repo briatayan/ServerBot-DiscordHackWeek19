@@ -3,6 +3,8 @@
 #tag split function
 def tagsplit (tags, sep):
     x = tags.split(sep)
+    # removes empty strings
+    x = list(filter(None, x))
     i = 0
     # removes all trailing and beginning whitespace
     while i < len(x):
