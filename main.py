@@ -131,7 +131,10 @@ async def editserver(ctx):
 async def serverSearch(ctx):
     tags = ctx.message.content.strip("!serverSearch")
     result = serverMethods.serverSearch(str(tags))
-    message = serverMethods.formatMessage(result)    
+    if result:
+        message = serverMethods.formatMessage(result)
+    else:
+        message = "There aren't any servers with any of those tags, sorry!"
     await ctx.send(message)
 
 
