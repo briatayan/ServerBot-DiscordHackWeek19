@@ -31,8 +31,8 @@ async def ping(ctx):
 @client.command()
 async def help(ctx):
     msg = "Need some help? Here are the commands and how to use them! \n\
-!addserver allows you to add yourserver to our running list. Use: !addserver tag1, tag2, etc. up to tag10. \n\
-!editserver allowes you to edit your tags and description. Use: !editserver tags: tag1, tag2, etc. up to tag10. \n\
+!addserver allows you to add yourserver to our running list. Use: !addserver tag1, tag2, etc. up to tag10; a description; and the invite link \n\
+!editserver allowes you to edit your tags and description. Use: !editserver tag; tag1, tag2, etc. up to tag10.description; this is a description. or \n\
 !deleteserver deletes yourserver from the list. Use: !deleteserver \n\
 !search allows you to search for servers you have tags in common with. Use. !search tag1, tag2, etc. up to tag10. \n\
 !help well this is awkward."
@@ -52,15 +52,15 @@ async def addserver(ctx):
     id = ctx.guild.id
     name = ctx.guild.name
     # This is the old name command name = ctx.message.content.strip("!addserver").split(":",2)[0].split(",")
-    tags = msg.strip().split(":")[0].strip()
+    tags = msg.strip().split(";")[0].strip()
     # old tag command description = ctx.message.content.split(":",2)[1].split(",")
-    description = msg.split(":",2)[1].strip()
-    description = msg.split(":",3)[2].strip()
+    description = msg.split(";",2)[1].strip()
+    invite = msg.split(";",3)[2].strip()
     if ctx.message.author.guild_permissions.administrator:
 
         len(tags) >= 1 and len(tags) <= 10
         try:
-            print(helperMethods.tagsplit(msg, ":"))
+            print(helperMethods.tagsplit(msg, ";"))
             serverMethods.serverAdd(str(id),name,tags,description,invite)
             await ctx.send(confmessage)
 
@@ -100,12 +100,13 @@ async def deleteserver(ctx):
 async def editserver(ctx):
     confmessage = "Great! Your server has been edited!"
     rejmessage = "Oh no! It looks like your server wasn't edited"
-    missmessage = "Looks like you're missing a new tag or Description! Use !editserver tags: tag 1, tag 2, tag 3, or description: description goes here"
+    missmessage = "Looks like you're missing a new tag or Description! Use !editserver tags; tag 1, tag 2, tag 3. description; description goes here. or invite; new link here"
     servadmin = "It looks like you are neither server owner or administrator! Try asking one of them?"
     msg = ctx.message.content.strip("!editserver")
     id = ctx.guild.id
-    tags = msg.split(":")[0].strip()
-    description = msg.split(":")[1].strip()
+    tags = msg.split(";")[0].strip()
+    description = msg.split(";")[1].strip()
+    invite = msg.split(";")[2].strip()
     tags = tags.lower()
     if ctx.message.author.guild_permissions.administrator:
         ctx.message.content
@@ -115,8 +116,9 @@ async def editserver(ctx):
             print(id)
             print(tags)
             print(description)
+            print(invite)
             print(helperMethods.tagsplit(msg, ":"))
-            serverMethods.serverEdit(str(id), tags, description)
+            serverMethods.serverEdit(str(id), tags, description, invite)
             await ctx.send(confmessage)
 
         except TypeError:
@@ -136,7 +138,5 @@ async def serverSearch(ctx):
     else:
         message = "There aren't any servers with any of those tags, sorry!"
     await ctx.send(message)
-
-
 
 client.run(TOKEN)
