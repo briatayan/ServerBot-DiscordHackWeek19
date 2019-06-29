@@ -138,9 +138,9 @@ async def serverSearch(ctx):
             description = value["description"]
             percentageMatched = value["percentageMatched"]
             id = key
-            link = await client.guild.fetch_invite
-            #ctx.guild.create_invite(destination=id,xkcd=True,max_age=0,max_uses=0,unique=False,reason="invite linke for new members through serverbot.")
-            message = confmessage + name + description + percentageMatched + link
+            link = client.get_guild(int(key)).fetch_invite(key)
+            print(type(link))
+            message = confmessage + name + description + percentageMatched
             print(message)
             await ctx.send(message)
 
