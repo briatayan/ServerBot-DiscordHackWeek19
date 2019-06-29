@@ -17,7 +17,7 @@
   <li><b>!addserver [comma-separated tags] : [description]</b> -- An admin inputs a set of tags and a description for their server; colons are used to differentiate the different items. If no tags and/or description are provided, the server will still be added with its ID and name. </li>
   <li><b>!editserver [value that needs to be changed] : [new value]</b> -- An admin inputs either tags or description, depending on what they want to change, and the new value. </li>
   <li><b>!removeserver</b> -- An admin can use this command to remove their server from our database. </li>
-  </ul>4
+  </ul>
 
 <h2>How to use ServerBot</h2>
 <p>
