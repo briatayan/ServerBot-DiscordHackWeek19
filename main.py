@@ -11,8 +11,6 @@ TOKEN = auth.TOKEN
 
 client= commands.Bot(command_prefix='!')
 
-message = client.get_channel(id)
-
 client.remove_command('help')
 
 # initial code
@@ -23,18 +21,13 @@ client.remove_command('help')
 async def on_ready():
     print("bot is ready")
 
-
-@client.command()
-async def ping(ctx):
-    await ctx.send(f'Pong!{round(client.latency * 1000)}ms')
-
 @client.command()
 async def help(ctx):
     msg = "Need some help? Here are the commands and how to use them! \n\
 !addserver allows you to add yourserver to our running list. Use: !addserver tag1, tag2, etc. up to tag10; a description; and the invite link \n\
-!editserver allowes you to edit your tags and description. Use: !editserver tag; tag1, tag2, etc. up to tag10.description; this is a description. or \n\
-!deleteserver deletes yourserver from the list. Use: !deleteserver \n\
-!search allows you to search for servers you have tags in common with. Use. !search tag1, tag2, etc. up to tag10. \n\
+!editserver allowes you to edit your tags and description. Use: !editserver tag; tag1, tag2, etc. up to tag10; description; this is a description. or \n\
+!deleteserver deletes your server from the list. Use: !deleteserver \n\
+!serversearch allows you to search for servers you have tags in common with. Use !serversearch tag1, tag2, etc. up to tag10. \n\
 !help well this is awkward."
     await ctx.send(msg)
 
@@ -45,7 +38,7 @@ async def hello(ctx):
 @client.command()
 async def addserver(ctx):
     confmessage = "Great! Your server is under review and will be apart of the server list soon."
-    rejmessage = "Oh no! It looks like something went wrong. Don't forget the format is name : tag, tag, tag : description"
+    rejmessage = "Oh no! It looks like something went wrong. Don't forget the format is name ; tag, tag, tag ; description"
     missmessage = "Looks like you're missing either a name, 1-10 tag(s), or a description."
     servadmin = "It looks like you are neither server owner or administrator!"
     msg = ctx.message.content.strip("!addserver")
@@ -102,7 +95,7 @@ async def editserver(ctx):
     rejmessage = "Oh no! It looks like your server wasn't edited"
     missmessage = "Looks like you're missing a new tag or Description! Use !editserver tags; tag 1, tag 2, tag 3. description; description goes here. or invite; new link here"
     servadmin = "It looks like you are neither server owner or administrator! Try asking one of them?"
-    msg = ctx.message.content.strip("!editserver")
+    msg = ctx.message.content.replace("!editserver", "")
     id = ctx.guild.id
     tags = msg.split(";")[0].strip()
     description = msg.split(";")[1].strip()
@@ -123,11 +116,11 @@ async def editserver(ctx):
         await ctx.send(servadmin)
 
 @client.command()
-async def serverSearch(ctx):
+async def serversearch(ctx):
     tags = ctx.message.content.strip("!serverSearch")
     result = serverMethods.serverSearch(str(tags))
     if result:
-        message = serverMethods.formatMessage(result)
+        message = helperMethods.formatMessage(result)
     else:
         message = "There aren't any servers with any of those tags, sorry!"
     await ctx.send(message)
