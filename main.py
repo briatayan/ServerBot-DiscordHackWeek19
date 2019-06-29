@@ -55,13 +55,13 @@ async def addserver(ctx):
     tags = msg.strip().split(":")[0].strip()
     # old tag command description = ctx.message.content.split(":",2)[1].split(",")
     description = msg.split(":",2)[1].strip()
-#replace the colon with a . and remove the # to allow administrator only mode.
+    description = msg.split(":",3)[2].strip()
     if ctx.message.author.guild_permissions.administrator:
 
         len(tags) >= 1 and len(tags) <= 10
         try:
             print(helperMethods.tagsplit(msg, ":"))
-            serverMethods.serverAdd(str(id),name,tags,description)
+            serverMethods.serverAdd(str(id),name,tags,description,invite)
             await ctx.send(confmessage)
 
         except TypeError:
@@ -137,11 +137,12 @@ async def serverSearch(ctx):
             name = value["name"]
             description = value["description"]
             percentageMatched = value["percentageMatched"]
+            invite = value["invite"]
             id = key
-            link = client.get_guild(int(key)).fetch_invite(key)
-            print(type(link))
-            message = confmessage + name + description + percentageMatched
-            print(message)
+            #link = await client.Create_invite(destination = ctx.message.channel)
+            #print(type(link))
+            message = "Here are some servers we think you will like: \n\ {} \n\ {} \n\ {} \n\ {} "
+            print(message.format(name,description,percentageMatched))
             await ctx.send(message)
 
 
