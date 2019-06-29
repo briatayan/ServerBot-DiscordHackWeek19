@@ -133,20 +133,7 @@ async def editserver(ctx):
 async def serverSearch(ctx):
     tags = ctx.message.content.strip("!serverSearch")
     result = serverMethods.serverSearch(str(tags))
-    for i in range(len(result)):
-        for key, value in result[i].items():
-            confmessage = "Here are some servers we think you would like based on your tags:"
-            name = value["name"]
-            description = value["description"]
-            percentageMatched = value["percentageMatched"]
-            invite = value["invite"]
-            id = key
-            #link = await client.Create_invite(destination = ctx.message.channel)
-            #print(type(link))
-            message = "Here are some servers we think you will like: \n\ {} \n\ {} \n\ {} \n\ {} "
-            print(message.format(name,description,percentageMatched))
-            await ctx.send(message)
-
-
+    message = serverMethods.formatMessage(result)
+    await ctx.send(message)
 
 client.run(TOKEN)
